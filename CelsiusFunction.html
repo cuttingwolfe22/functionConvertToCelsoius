@@ -1,18 +1,122 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-<h2>JavaScript Functions</h2>
 
-<p>This example calls a function to convert from Fahrenheit to Celsius:</p>
-<p id="demo"></p>
+    <style>
+
+{
+   box-sizing: border-box;
+   font-family: 'Fjalla One', Impact, Arial, sans-serif;
+}
+
+body {
+   background-color: #ffeaa7;
+}
+
+form {
+   background-color: #fab1a0;
+   padding: 80px;
+   width: 50%;
+   margin: 100px auto;
+   text-align: center;
+}
+
+#tempCalc label {
+   font-size: 30px;
+}
+
+#temp {
+   border: none;
+   padding: 10px;
+   height: 40px;
+   width: 100px;
+   font-size: 20px;
+   margin-top: 20px;
+}
+
+#temp_diff {
+   height: 40px;
+   border: none;
+   margin-top: 20px;
+   font-size: 15px;
+   vertical-align: top;
+}
+
+[type="submit"] {
+   height: 35px;
+   margin: 20px;
+   width: 100px;
+   font-size: 15px;
+   border: none;
+   background-color: black;
+   color: white;
+}
+
+#resultContainer {
+   font-size: 35px;
+}
+
+
+
+
+
+
+    </style>
+
 
 <script>
-function toCelsius(f) {
-  return (5/9) * (f-32);
-}
-document.getElementById("demo").innerHTML = toCelsius(120);
-</script>
 
+
+
+function calculateTemp() {
+   function celToFah(celsius) {
+      var fahrenheit = Math.round((celsius * (9/5)) + 32);
+      return fahrenheit;
+   }
+
+   function fahToCel(fahrenheit) {
+      var celsius = Math.round((fahrenheit - 32) * (5/9));
+      return celsius;
+   }
+
+   // Checks if Calsius or Fahrenheit is selected
+   var tempSelected = document.getElementById("temp_diff");
+   var valueTemp = tempSelected.options[tempSelected.selectedIndex].value;
+
+   // Checks the value inside the Temperature input
+   var numberTemp = document.getElementById("temp").value;
+
+   var result;
+   
+   if (valueTemp == 1) {
+      result = celToFah(numberTemp);
+      document.getElementById("resultContainer").innerHTML = "= " + result + "°Fahrenheit";
+   } else {
+      result = fahToCel(numberTemp);
+      document.getElementById("resultContainer").innerHTML = "= " + result + "°Celsius";
+   }
+   
+}
+</script>
+</head>
+<body>
+
+
+    <form id="tempCalc" onsubmit="calculateTemp(); return false">
+        <label for="temp">Please enter the temperature you'd like to convert.</label> <br>
+        <input name="temp" id="temp" type="number"> 
+        <select name="temp_diff" id="temp_diff">
+           <option value="1">°Celsius</option>
+           <option value="2">°Fahrenheit</option>
+        </select> <br>
+        <input name="temp" type="submit"> <br>
+        <span id="resultContainer"></span>
+     </form>
+    
 </body>
-</html
+</html>
